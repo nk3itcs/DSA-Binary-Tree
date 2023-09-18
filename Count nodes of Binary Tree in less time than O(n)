@@ -1,0 +1,32 @@
+class Solution {
+    private:
+        int leftHeight(TreeNode *tmpRoot1){
+            int cnt1=0;
+            while(tmpRoot1!=NULL){
+                cnt1++;
+                tmpRoot1=tmpRoot1->left;
+            }
+            return cnt1;
+        }
+        int rightHeight(TreeNode *tmpRoot2){
+            int cnt2=0;
+
+            while(tmpRoot2!=NULL){
+                cnt2++;
+                tmpRoot2=tmpRoot2->right;
+            }
+            return cnt2;
+        }
+public:
+    int countNodes(TreeNode* root) {
+        if(root==NULL)
+            return 0;
+        int lh=leftHeight(root);
+        int rh=rightHeight(root);
+
+        if(lh==rh)
+            return (1<<lh)-1;
+        else{
+            return 1+ countNodes(root->left) + countNodes(root->right);
+        }
+    }
